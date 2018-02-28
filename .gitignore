@@ -2,3 +2,4 @@
 mybook/db.sqlite3
 mybookvenv/
 mybook/mybook/pycache/
+mybook/book/migrations/
