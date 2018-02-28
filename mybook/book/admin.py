@@ -1,3 +1,16 @@
 from django.contrib import admin
+from mybook.book.models import Book, User
 
-# Register your models here.
+
+class BookAdmin(admin.ModelAdmin):
+    list_display = [f.name for f in Book._meta.fields]
+    search_fields = ('title',)
+
+admin.site.register(Book, BookAdmin)
+
+
+class UserAdmin(admin.ModelAdmin):
+    list_display = [f.name for f in User._meta.fields]
+    search_fields = ('name',)
+
+admin.site.register(User, UserAdmin)
