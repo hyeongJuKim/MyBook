@@ -23,6 +23,8 @@ class User(AbstractBaseUser):
     nick_name = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
 
+    USERNAME_FIELD = 'name'
+
     class Meta:
         verbose_name = 'user'
         verbose_name_plural = 'users'
