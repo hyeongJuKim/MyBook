@@ -11,8 +11,15 @@ def test_user_count():
     assert User.objects.count() == 0
 
 @pytest.mark.django_db
+def test_user_create_without_email():
+    with pytest.raises(ValueError):
+        me = User.objects.create_user(name="강현구", email="")
+        me.save()
+
+
+@pytest.mark.django_db
 def test_user_create():
-    me = User(name="강현구", nick_name="rkdgusrnrlrl")
+    me = User.objects.create_user(email="rkdgusrnrlrl@gmail.com", name="강현구", nick_name="rkdgusrnrlrl")
     me.save()
     assert User.objects.count() == 1
 
