@@ -2,6 +2,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from django.contrib.auth.models import BaseUserManager
 
+
 class Book(models.Model):
     title = models.CharField(max_length=100)
     contents = models.CharField(max_length=300, blank=True)
@@ -16,6 +17,7 @@ class Book(models.Model):
 
         def __str__(self):
             return self.title
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, name, nick_name=None, password=None):
