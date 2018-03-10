@@ -1,5 +1,6 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
+from django.contrib.auth.models import BaseUserManager
 
 
 class Book(models.Model):
@@ -18,12 +19,43 @@ class Book(models.Model):
             return self.title
 
 
+class UserManager(BaseUserManager):
+    def create_user(self, email, name, nick_name=None, password=None):
+        if not email:
+            raise ValueError("User must have an email")
+
+        user = self.model(email=email, name=name, nick_name=nick_name)
+        user.set_password(password)
+        user.save()
+        return user
+
+    def create_superuser(self, email, name, password):
+        user = self.model(email=email, name=name)
+        user.set_password(password)
+        user.is_admin = True
+        user.save()
+
+
 class User(AbstractBaseUser):
+    email = models.EmailField(unique=True)
     name = models.CharField(max_length=20)
     nick_name = models.CharField(max_length=20)
-    password = models.CharField(max_length=20)
+    is_admin = models.BooleanField(default=False)
 
-    USERNAME_FIELD = 'name'
+    objects = UserManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['name']
+
+    @property
+    def is_staff(self):
+        return self.is_admin
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
 
     class Meta:
         verbose_name = 'user'
