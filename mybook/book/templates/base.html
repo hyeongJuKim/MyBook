@@ -3,21 +3,24 @@
 <head>
   <meta charset="UTF-8">
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
 <style>
+
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css);
 * { font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif'; }
 
+/* element */
+
+
+/* bootstrap */
 .navbar-brand {
   padding-left: 20px;
-}
-
-.navbar-collapse {
-    float:none;
-    display:inline-block;
-    vertical-align: top;
-    padding-left: 0;
-    padding-right: 0;
 }
 
 .navbar-collapse{
@@ -28,6 +31,51 @@
   text-align: center;
 }
 
+
+/* custom */
+
+.content-body {
+  margin: 15px 0;
+}
+
+.book-card {
+  border-bottom: 1px solid #dee2e6;
+
+}
+
+.book-action-box {
+  margin: 15px 0;
+  text-align: center;
+  font-size: 20px;
+}
+
+.book-add-btn {
+  border: 1px solid gray;
+}
+
+.book-card a {
+  text-decoration:none;
+  color: #000000;
+}
+
+.book-card .card-body {
+  padding:13px;
+}
+
+
+.book-card .column-title {
+  font-size: 15px;
+  font-weight:500;
+  margin:0;
+}
+
+.book-card .column-text {
+  font-size: 13px;
+  font-weight:300;
+  margin:0;
+}
+
+
 </style>
 
 
@@ -37,7 +85,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #D4F4FA!important;">
 
   <div class="navbar-brand-div">
-    <a class="navbar-brand" href="#">My Book</a>
+    <a class="navbar-brand" href="{% url 'index' %}">메인</a>
   </div>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,8 +94,8 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">메인<span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'index' %}">메인</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'book-list' %}">내 서재</a>
@@ -73,8 +121,4 @@
 {% block footer %}{% endblock %}
 
 </body>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </html>

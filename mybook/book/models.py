@@ -1,6 +1,7 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from django.contrib.auth.models import BaseUserManager
+from django.urls import reverse
 
 
 class Book(models.Model):
@@ -10,6 +11,9 @@ class Book(models.Model):
     user = models.ForeignKey('User',
                              on_delete=models.CASCADE,
                              null=False, blank=False)
+
+    def get_absolute_url(self):
+        return reverse('book-detail', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = 'book'

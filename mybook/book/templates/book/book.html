@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="content-body">
+    <div class="book-action-box">
+      <a href="{% url 'book-create' %}">
+        <button type="button" class="btn btn-light book-add-btn">책 등록</button>
+      </a>
+    </div>
+
+    {% for book in books %}
+        <div class="book-card">
+          <a href="{% url 'book-detail' book.id %}" class="">
+            <div class="card-body">
+                <p class="book-card-data column-title">{{ book.title }}</p>
+                <p class="book-card-data column-text">{{ book.created|date:"Y-m-d" }}</p>
+            </div>
+          </a>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
