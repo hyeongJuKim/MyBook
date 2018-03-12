@@ -11,7 +11,7 @@
 
     {% for book in books %}
         <div class="book-card">
-          <a href="{% url 'book-detail' book.id %}" class="">
+          <a href="{{ book.get_absolute_url }}">
             <div class="card-body">
                 <p class="book-card-data column-title">{{ book.title }}</p>
                 <p class="book-card-data column-text">{{ book.created|date:"Y-m-d" }}</p>
