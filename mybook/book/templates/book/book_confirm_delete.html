@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<form action="" method="post">{% csrf_token %}
+<form action="{% url 'book-delete' book.id %}" method="post">{% csrf_token %}
     <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input type="submit" value="Confirm" />
+    <input type="submit" value="삭제" />
 </form>
 
 {% endblock %}
