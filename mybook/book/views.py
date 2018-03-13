@@ -39,6 +39,6 @@ class BookUV(UpdateView):
 
 class BookXV(DeleteView):
     models = Book
-    # template_name_suffix = '_confirm_delete'
+    queryset = Book.objects.all()
+    template_name = 'book/book_confirm_delete.html'
     success_url = reverse_lazy('book-list')
-    # template_name = 'book/book_confirm_delete.html'
