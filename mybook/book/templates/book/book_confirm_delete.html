@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<form action="{% url 'book-delete' book.id %}" method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input type="submit" value="삭제" />
-</form>
-
+<div class="content-body">
+  <form action="{% url 'book-delete' book.id %}" method="post">{% csrf_token %}
+    <div class="book-action-box">
+        <p>"{{ book.title }}" 책을 삭제하시겠습니까?</p>
+        <button type="submit" class="btn btn-danger"> 삭제</button>
+        <a href="{% url 'book-update' book.id %}">
+          <button type="button" class="btn btn-secondary">뒤로가기</button>
+        </a>
+    </div>
+  </form>
+</div>
 {% endblock %}
