@@ -2,8 +2,6 @@
 
 {% block content %}
 <div class="content-body">
-
-  {{ form.errors }}
   <form action="{% url 'book-create' %}" method="post">{% csrf_token %}
     <div class="form-group row">
       <label for="id_title" class="col-sm-2 col-form-label">책 이름</label>
