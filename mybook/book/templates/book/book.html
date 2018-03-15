@@ -5,10 +5,10 @@
   <div class="content-body">
     <div class="book-action-box">
       <a href="{% url 'book-create' %}">
-        <button type="button" class="btn btn-light book-add-btn">책 등록</button>
+        <span class="mybook-message align-middle mr-3">{{ books.count }}권 + </span>
+        <button type="button" class="btn btn-light book-add-btn">책 등록하기</button>
       </a>
     </div>
-
     {% for book in books %}
         <div class="book-card">
           <a href="{{ book.get_absolute_url }}">
