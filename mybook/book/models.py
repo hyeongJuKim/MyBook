@@ -61,6 +61,9 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
+    def get_absolute_url(self):
+        return reverse('user-detail', kwargs={'pk': self.pk})
+
     class Meta:
         verbose_name = 'user'
         verbose_name_plural = 'users'

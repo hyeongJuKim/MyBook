@@ -15,11 +15,15 @@ Including another URLconf
 """
 from django.urls import path
 
-from .views import BookLV, BookDV, BookCV, BookXV, BookUV
+from .views import *
 from . import views
 
 urlpatterns = [
     path(r'', views.main, name='index'),
+    path('users/register', UserCV.as_view(), name='user-create'),
+    path('users/<int:pk>', UserDV.as_view(), name='user-detail'),
+    path('users/me', MyPageView.as_view(), name='mypage'),
+    path('users/login', UserLoginView.as_view(), name='login'),
     path('book/', BookLV.as_view(), name='book-list'),
     path('book/<int:pk>/', BookDV.as_view(), name='book-detail'),
     path('book/add/', BookCV.as_view(), name='book-create'),
