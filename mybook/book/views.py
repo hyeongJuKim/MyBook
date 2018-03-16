@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Book
-from .user_view import UserCV, UserDV
+from .user_view import *
 
 
 def main(request):
