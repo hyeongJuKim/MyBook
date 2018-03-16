@@ -1,5 +1,6 @@
 from .models import User
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class UserCreationForm(forms.ModelForm):
@@ -10,8 +11,8 @@ class UserCreationForm(forms.ModelForm):
         model = User
         fields = ('email', 'name')
         labels = {
-            'email' : 'Email',
-            'name' : '이름',
+            'email': 'Email',
+            'name': '이름',
         }
 
     def clean_password_confirm(self):
@@ -40,3 +41,8 @@ class UserChangeForm(forms.ModelForm):
 
     def clean_password(self):
         return self.cleaned_data['password']
+
+
+class UserLoginForm(AuthenticationForm):
+    def confirm_login_allowed(self, user):
+        pass
