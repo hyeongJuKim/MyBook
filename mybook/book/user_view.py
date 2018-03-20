@@ -1,9 +1,9 @@
-from django.views.generic import FormView, DetailView, TemplateView
+from django.views.generic import FormView, DetailView, TemplateView, UpdateView, CreateView
 from django.contrib.auth.views import LoginView
 from .models import User
-from .forms import UserCreationForm, UserLoginForm
+from .forms import *
 from django.urls import reverse
-
+from django.contrib.auth import update_session_auth_hash
 
 class UserCV(FormView):
     form_class = UserCreationForm
@@ -24,14 +24,30 @@ class UserDV(DetailView):
     context_object_name = 'user'
 
 
-class MyPageView(TemplateView):
+class MyPageView(UpdateView):
     model = User
-    template_name = 'book/user_detail.html'
+    form_class = UserChangeForm
+    template_name = 'book/user_update.html'
 
-    def get_context_data(self, **kwargs):
-        print(self.request.user)
-        return {'user' : self.request.user}
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
 
+        form = self.get_form()
+        if form.is_valid():
+            # 비밀번호 변경으로 세션 초기화되 다시 세션 값을 설정 해줌
+            user = self.object
+            update_session_auth_hash(request, user)
+
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_success_url(self):
+        return reverse('mypage')
 
 
 class UserLoginView(LoginView):
