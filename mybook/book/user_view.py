@@ -35,10 +35,11 @@ class MyPageView(UpdateView):
         form = self.get_form()
         if form.is_valid():
             # 비밀번호 변경으로 세션 초기화되 다시 세션 값을 설정 해줌
+            response = self.form_valid(form)
             user = self.object
             update_session_auth_hash(request, user)
 
-            return self.form_valid(form)
+            return response
         else:
             return self.form_invalid(form)
 
