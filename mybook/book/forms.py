@@ -89,8 +89,11 @@ class UserChangeForm(forms.ModelForm):
         user = super().save(commit=False)
         password = self.cleaned_data['password']
 
-        if password is not None and commit:
+        if password is not None:
+            print(user.name)
             user.set_password(password)
+
+        if commit:
             user.save()
             return user
 
