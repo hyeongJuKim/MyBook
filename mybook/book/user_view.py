@@ -1,9 +1,9 @@
-from django.views.generic import FormView, DetailView, TemplateView, UpdateView, CreateView
+from django.views.generic import FormView, DetailView, UpdateView, RedirectView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import *
 from django.urls import reverse
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import update_session_auth_hash, logout
 
 class UserCV(FormView):
     form_class = UserCreationForm
@@ -58,3 +58,14 @@ class UserLoginView(LoginView):
 
     def get_success_url(self):
         return reverse('mypage')
+
+class UserLogoutView(RedirectView):
+    permanent = False
+    query_string = True
+    pattern_name = 'home'
+
+    def get_redirect_url(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            logout(self.request)
+
+        return reverse('login')
