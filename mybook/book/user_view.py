@@ -1,6 +1,6 @@
 from django.views.generic import FormView, DetailView, TemplateView, UpdateView, CreateView
 from django.contrib.auth.views import LoginView
-from .models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import *
 from django.urls import reverse
 from django.contrib.auth import update_session_auth_hash
@@ -24,7 +24,7 @@ class UserDV(DetailView):
     context_object_name = 'user'
 
 
-class MyPageView(UpdateView):
+class MyPageView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UserChangeForm
     template_name = 'book/user_update.html'
