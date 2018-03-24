@@ -1,9 +1,9 @@
-from django.views.generic import FormView, DetailView, TemplateView
+from django.views.generic import FormView, DetailView, UpdateView, RedirectView
 from django.contrib.auth.views import LoginView
-from .models import User
-from .forms import UserCreationForm, UserLoginForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import *
 from django.urls import reverse
-
+from django.contrib.auth import update_session_auth_hash, logout
 
 class UserCV(FormView):
     form_class = UserCreationForm
@@ -24,14 +24,31 @@ class UserDV(DetailView):
     context_object_name = 'user'
 
 
-class MyPageView(TemplateView):
+class MyPageView(LoginRequiredMixin, UpdateView):
     model = User
-    template_name = 'book/user_detail.html'
+    form_class = UserChangeForm
+    template_name = 'book/user_update.html'
 
-    def get_context_data(self, **kwargs):
-        print(self.request.user)
-        return {'user' : self.request.user}
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
 
+        form = self.get_form()
+        if form.is_valid():
+            # 비밀번호 변경으로 세션 초기화되 다시 세션 값을 설정 해줌
+            response = self.form_valid(form)
+            user = self.object
+            update_session_auth_hash(request, user)
+
+            return response
+        else:
+            return self.form_invalid(form)
+
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_success_url(self):
+        return reverse('mypage')
 
 
 class UserLoginView(LoginView):
@@ -41,3 +58,14 @@ class UserLoginView(LoginView):
 
     def get_success_url(self):
         return reverse('mypage')
+
+class UserLogoutView(RedirectView):
+    permanent = False
+    query_string = True
+    pattern_name = 'home'
+
+    def get_redirect_url(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            logout(self.request)
+
+        return reverse('login')

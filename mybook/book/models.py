@@ -41,9 +41,9 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    email = models.EmailField(unique=True)
-    name = models.CharField(max_length=20)
-    nick_name = models.CharField(max_length=20)
+    email = models.EmailField(unique=True, verbose_name='Email')
+    name = models.CharField(max_length=20, verbose_name='이름')
+    nick_name = models.CharField(max_length=20, verbose_name='닉네임', blank=True)
     is_admin = models.BooleanField(default=False)
 
     objects = UserManager()
