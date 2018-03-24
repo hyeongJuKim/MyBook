@@ -17,7 +17,7 @@ from django.urls import path
 
 from . import book_views
 from .book_views import BookLV, BookCV, BookDV, BookUV, BookXV
-from .user_view import UserCV, UserDV, UserLoginView, MyPageView
+from .user_view import UserCV, UserDV, UserLoginView, MyPageView, UserLogoutView
 
 urlpatterns = [
     path(r'', book_views.main, name='index'),
