@@ -28,7 +28,7 @@ class BookDV(DetailView):
 
 class BookCV(CreateView):
     model = Book
-    fields = ['title', 'contents', 'user']
+    form_class = BookCreateForm
     template_name = 'book/book_create.html'
 
 
