@@ -16,7 +16,7 @@ class Book(models.Model):
     )
 
     title = models.CharField(max_length=100)
-    contents = models.CharField(max_length=300, blank=True)
+    contents = models.CharField(max_length=300, null=True, blank=True)
     read_status = models.CharField(max_length=1, choices=READ_STATUS,
                                    default=NOT_READ, blank=False)
     purchase_date = models.DateField(null=True)
