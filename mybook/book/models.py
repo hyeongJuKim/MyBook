@@ -15,13 +15,13 @@ class Book(models.Model):
         (READ, '읽음'),
     )
 
-    title = models.CharField(max_length=100)
-    contents = models.CharField(max_length=300, null=True, blank=True)
-    read_status = models.CharField(max_length=1, choices=READ_STATUS,
+    title = models.CharField(verbose_name='타이틀', max_length=100)
+    contents = models.CharField(verbose_name='서평', max_length=300, null=True, blank=True)
+    read_status = models.CharField(verbose_name='책 상태', max_length=1, choices=READ_STATUS,
                                    default=NOT_READ, blank=False)
-    purchase_date = models.DateField(null=True)
-    created = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey('User',
+    purchase_date = models.DateField(verbose_name='구매일', null=True)
+    created = models.DateTimeField(verbose_name='등록일', auto_now_add=True)
+    user = models.ForeignKey('User', verbose_name='사용자',
                              on_delete=models.CASCADE,
                              null=False, blank=False)
 
