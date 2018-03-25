@@ -103,7 +103,7 @@ class UserLoginForm(AuthenticationForm):
         pass
 
 
-class BookCreateForm(forms.ModelForm):
+class BookForm(forms.ModelForm):
     contents = forms.CharField(label='서평', required=False,
                                widget=forms.Textarea(
                                    attrs={'rows': 5, 'cols': 100}))
@@ -114,6 +114,4 @@ class BookCreateForm(forms.ModelForm):
     class Meta:
         model = Book
         fields = ['title', 'contents', 'user', 'purchase_date', 'read_status']
-
-
 
