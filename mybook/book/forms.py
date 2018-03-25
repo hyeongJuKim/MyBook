@@ -1,4 +1,4 @@
-from .models import User
+from .models import User, Book
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -101,3 +101,19 @@ class UserChangeForm(forms.ModelForm):
 class UserLoginForm(AuthenticationForm):
     def confirm_login_allowed(self, user):
         pass
+
+
+class BookCreateForm(forms.ModelForm):
+    contents = forms.CharField(label='서평', required=False,
+                               widget=forms.Textarea(
+                                   attrs={'rows': 5, 'cols': 100}))
+    purchase_date = forms.DateField(label='구매일', required=False,
+                                    widget=forms.DateInput(
+                                        attrs={'type': 'date'}))
+
+    class Meta:
+        model = Book
+        fields = ['title', 'contents', 'user', 'purchase_date', 'read_status']
+
+
+
