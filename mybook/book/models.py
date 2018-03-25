@@ -5,8 +5,21 @@ from django.urls import reverse
 
 
 class Book(models.Model):
+    NOT_READ = '1'
+    READING = '2'
+    READ = '3'
+
+    READ_STATUS = (
+        (NOT_READ, '읽지않음'),
+        (READING, '읽는중'),
+        (READ, '읽음'),
+    )
+
     title = models.CharField(max_length=100)
     contents = models.CharField(max_length=300, blank=True)
+    read_status = models.CharField(max_length=1, choices=READ_STATUS,
+                                   default=NOT_READ, blank=False)
+    purchase_date = models.DateField(null=True)
     created = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey('User',
                              on_delete=models.CASCADE,
