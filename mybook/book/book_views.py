@@ -15,6 +15,7 @@ def main(request):
 
 class BookLV(ListView):
     model = Book
+    ordering = ['-created']
     template_name = 'book/book.html'
     context_object_name = 'books'
     # paginate_by = 10  # 페이징
@@ -28,13 +29,14 @@ class BookDV(DetailView):
 
 class BookCV(CreateView):
     model = Book
-    fields = ['title', 'contents', 'user']
+    form_class = BookForm
     template_name = 'book/book_create.html'
 
 
 class BookUV(UpdateView):
     model = Book
-    fields = ['title', 'contents']
+    form_class = BookForm
+    # fields = ['title', 'contents', 'purchase_date', 'read_status']
     template_name_suffix = '_update'
 
 
