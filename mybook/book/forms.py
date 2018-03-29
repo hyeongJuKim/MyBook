@@ -103,6 +103,19 @@ class UserLoginForm(AuthenticationForm):
         pass
 
 
+class BookCreateForm(forms.ModelForm):
+    contents = forms.CharField(label='서평', required=False,
+                               widget=forms.Textarea(
+                                   attrs={'rows': 5, 'cols': 100}))
+    purchase_date = forms.DateField(label='구매일', required=False,
+                                    widget=forms.DateInput(
+                                        attrs={'type': 'date'}))
+
+    class Meta:
+        model = Book
+        fields = ['title', 'contents', 'user', 'purchase_date', 'read_status']
+
+
 class BookForm(forms.ModelForm):
     contents = forms.CharField(label='서평', required=False,
                                widget=forms.Textarea(
