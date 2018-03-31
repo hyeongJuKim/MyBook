@@ -14,11 +14,11 @@
   {% endfor %}
     <div class="book-action-box">
       <input type="submit" class="btn btn-primary" value="로그인" />
-      <a href="{% url 'index' %}">
-        <button type="button" class="btn btn-secondary">돌아가기</button>
-      </a>
       <a href="{% url 'user-create' %}">
         <button type="button" class="btn btn-secondary">회원가입</button>
+      </a>
+      <a href="{% url 'index' %}">
+        <button type="button" class="btn btn-secondary">돌아가기</button>
       </a>
     </div>
   </form>
