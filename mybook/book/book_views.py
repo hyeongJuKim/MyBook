@@ -13,12 +13,14 @@ def main(request):
 #     return render(request, 'book/book.html')
 
 
-class BookLV(ListView):
+class BookLV(LoginRequiredMixin, ListView):
     model = Book
     ordering = ['-created']
     template_name = 'book/book.html'
     context_object_name = 'books'
-    # paginate_by = 10  # 페이징
+
+    def get_queryset(self):
+        return Book.objects.filter(user=self.request.user)
 
 
 class BookDV(DetailView):
@@ -29,7 +31,7 @@ class BookDV(DetailView):
 
 class BookCV(CreateView):
     model = Book
-    form_class = BookForm
+    form_class = BookCreateForm
     template_name = 'book/book_create.html'
 
 
@@ -38,6 +40,9 @@ class BookUV(UpdateView):
     form_class = BookForm
     # fields = ['title', 'contents', 'purchase_date', 'read_status']
     template_name_suffix = '_update'
+
+    def get_queryset(self):
+        return Book.objects.filter(user=self.request.user)
 
 
 class BookXV(DeleteView):
