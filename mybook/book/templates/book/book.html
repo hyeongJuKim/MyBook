@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
   <div class="content-body">
     <div class="book-action-box">
       <a href="{% url 'book-create' %}">
@@ -10,20 +9,26 @@
       </a>
     </div>
     {% for book in books %}
-      <div class="book-card">
-        <a href="{{ book.get_absolute_url }}">
-          <div class="card-body book-module">
-            <p class="book-card-data column-title">{{ book.title }}</p>
-            <p class="book-card-data column-text">{{ book.created|date:"Y-m-d" }}</p>
-            {% if book.read_status == '1'%}
-              <span class="badge badge-pill badge-default">{{ book.get_read_status_display }}</span>
-            {% elif book.read_status == '2'%}
-              <span class="badge badge-pill badge-info">{{ book.get_read_status_display }}</span>
-            {% elif book.read_status == '3'%}
-              <span class="badge badge-pill badge-primary">{{ book.get_read_status_display }}</span>
-            {% endif %}
-          </div>
-        </a>
+      <div class="col-md-4" style="float: left;">
+        <div class="book-card">
+          <a href="{{ book.get_absolute_url }}">
+            <div class="card-body book-module">
+              <p class="book-card-data column-title">{{ book.title }}</p>
+              <p class="book-card-data column-text">{{ book.created|date:"Y-m-d" }}</p>
+            </div>
+          </a>
+          <a href="">
+            <div class="book-status-badge">
+              {% if book.read_status == '1'%}
+                <span class="badge badge-pill badge-default">{{ book.get_read_status_display }}</span>
+              {% elif book.read_status == '2'%}
+                <span class="badge badge-pill badge-info">{{ book.get_read_status_display }}</span>
+              {% elif book.read_status == '3'%}
+                <span class="badge badge-pill badge-primary">{{ book.get_read_status_display }}</span>
+              {% endif %}
+            </div>
+          </a>
+        </div>
       </div>
     {% endfor %}
   </div>
