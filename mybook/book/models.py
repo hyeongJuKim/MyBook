@@ -28,6 +28,15 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse('book-detail', kwargs={'pk': self.pk})
 
+    @property
+    def read_status_class(self):
+        if self.read_status is self.NOT_READ:
+            return "badge-default"
+        elif self.read_status is self.READING:
+            return "badge-info"
+        else:
+            return "badge-primary"
+
     class Meta:
         verbose_name = 'book'
         verbose_name_plural = 'books'
