@@ -34,6 +34,10 @@ class BookCV(CreateView):
     form_class = BookCreateForm
     template_name = 'book/book_create.html'
 
+    def form_invalid(self, form):
+        print('invaliu')
+        return self.render_to_response(self.get_context_data(form=form))
+
 
 class BookUV(UpdateView):
     model = Book
