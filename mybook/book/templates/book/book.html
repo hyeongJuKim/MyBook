@@ -19,13 +19,9 @@
           </a>
           <a href="">
             <div class="book-status-badge">
-              {% if book.read_status == '1'%}
-                <span class="badge badge-pill badge-default">{{ book.get_read_status_display }}</span>
-              {% elif book.read_status == '2'%}
-                <span class="badge badge-pill badge-info">{{ book.get_read_status_display }}</span>
-              {% elif book.read_status == '3'%}
-                <span class="badge badge-pill badge-primary">{{ book.get_read_status_display }}</span>
-              {% endif %}
+                <span class="badge badge-pill {{ book.read_status_class }}">
+                    {{ book.get_read_status_display }}
+                </span>
             </div>
           </a>
         </div>

@@ -7,13 +7,9 @@
       <h3>{{ book.title }}</h3>
       <h6>{{ book.contents|linebreaks }}</h6>
       <div class="book-status-badge">
-      {% if book.read_status == '1'%}
-        <span class="badge badge-pill badge-default">{{ book.get_read_status_display }}</span>
-      {% elif book.read_status == '2'%}
-        <span class="badge badge-pill badge-info">{{ book.get_read_status_display }}</span>
-      {% elif book.read_status == '3'%}
-        <span class="badge badge-pill badge-primary">{{ book.get_read_status_display }}</span>
-      {% endif %}
+        <span class="badge badge-pill {{ book.read_status_class }}">
+            {{ book.get_read_status_display }}
+        </span>
       </div>
       <p class="book-card-data column-text">구매일: {{ book.purchase_date|date:"Y-m-d" }} </p>
       <p class="book-card-data column-text">닉네임: {{ book.user.nick_name }} </p>
