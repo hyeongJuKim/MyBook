@@ -1,7 +1,14 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from django.contrib.auth.models import BaseUserManager
+from django.forms import forms
 from django.urls import reverse
+
+
+def limit_today_validator(date):
+    import datetime
+    if date > datetime.date.today():
+        raise forms.ValidationError("오늘 날짜를 넘을 수 없습니다.")
 
 
 class Book(models.Model):
@@ -19,7 +26,8 @@ class Book(models.Model):
     contents = models.CharField(verbose_name='서평', max_length=300, null=True, blank=True)
     read_status = models.CharField(verbose_name='책 상태', max_length=1, choices=READ_STATUS,
                                    default=NOT_READ, blank=False)
-    purchase_date = models.DateField(verbose_name='구매일', null=True)
+    purchase_date = models.DateField(verbose_name='구매일', null=True,
+                                     validators=[limit_today_validator])
     created = models.DateTimeField(verbose_name='등록일', auto_now_add=True)
     user = models.ForeignKey('User', verbose_name='사용자',
                              on_delete=models.CASCADE,
