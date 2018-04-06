@@ -26,6 +26,7 @@
         <label for="purchase_date" class="col-sm-2 col-form-label">구매일</label>
         <div class="col-sm-10">
           {{ form.purchase_date|add_class:"form-control" }}
+          {{ form.purchase_date.errors }}
         </div>
       </div>
       <input type="hidden" name="user" id="id_user" class="form-control" value="{{ user.id }}">    <div class="book-action-box">
