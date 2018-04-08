@@ -25,7 +25,7 @@
     <div class="form-group row">
       <label for="purchase_date" class="col-sm-2 col-form-label">구매일</label>
       <div class="col-sm-10">
-        <input type="date" name="purchase_date" id="id_purchase_date" class="form-control" value="{{ form.purchase_date.value }}">
+        {{ form.purchase_date|add_class:"form-control" }}
         {{ form.purchase_date.errors }}
       </div>
     </div>
