@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -38,7 +39,6 @@ class BookCV(CreateView):
 class BookUV(UpdateView):
     model = Book
     form_class = BookForm
-    # fields = ['title', 'contents', 'purchase_date', 'read_status']
     template_name_suffix = '_update'
 
     def get_queryset(self):
