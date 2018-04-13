@@ -7,7 +7,7 @@
       <h3>{{ book.title }}</h3>
       <h6>{{ book.contents|linebreaks }}</h6>
       <div class="book-status-badge">
-        <span class="badge badge-pill {{ book.read_status_class }}">
+        <span class="badge badge-pill badge-{{ book.read_status_class }}">
             {{ book.get_read_status_display }}
         </span>
       </div>
