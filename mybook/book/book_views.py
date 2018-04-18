@@ -23,6 +23,13 @@ class BookLV(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Book.objects.filter(user=self.request.user)
 
+    def get_context_data(self, **kwargs):
+        context = super(BookLV, self).get_context_data(**kwargs)
+        read_status_counts = self.model.objects.filter(user=self.request.user).values(
+            'read_status').annotate(count=Count('read_status')).order_by('read_status')
+        context.update({"read_status_counts": read_status_counts})
+        return context
+
 
 class BookDV(DetailView):
     model = Book

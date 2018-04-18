@@ -22,6 +22,12 @@ class Book(models.Model):
         (READ, '읽음'),
     )
 
+    READ_STATUS_COLOR = {
+        NOT_READ: 'default',
+        READING: 'info',
+        READ: 'primary',
+    }
+
     title = models.CharField(verbose_name='타이틀', max_length=100)
     contents = models.CharField(verbose_name='서평', max_length=300, null=True, blank=True)
     read_status = models.CharField(verbose_name='책 상태', max_length=1, choices=READ_STATUS,
@@ -38,12 +44,7 @@ class Book(models.Model):
 
     @property
     def read_status_class(self):
-        if self.read_status is self.NOT_READ:
-            return "badge-default"
-        elif self.read_status is self.READING:
-            return "badge-info"
-        else:
-            return "badge-primary"
+        return Book.READ_STATUS_COLOR[self.read_status]
 
     class Meta:
         verbose_name = 'book'

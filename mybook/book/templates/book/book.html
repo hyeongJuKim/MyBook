@@ -1,13 +1,32 @@
 {% extends 'base.html' %}
+{% load book_extras %}
 
 {% block content %}
   <div class="content-body">
-    <div class="book-action-box">
-      <a href="{% url 'book-create' %}">
-        <span class="mybook-message align-middle mr-3">{{ books.count }}권 + </span>
-        <button type="button" class="btn btn-light book-add-btn">책 등록하기</button>
-      </a>
+    <div class="col-md-12">
+      <div class="book-action-box">
+        <div style="display: inline-block">
+          <div class="mybook-message align-middle mr-3">
+             <span class="mybook-message-unit">총</span><br>
+            {{ books.count }}<span class="mybook-message-unit">권</span>
+          </div>
+         </div>
+        {% for count in read_status_counts %}
+          <div style="display: inline-block">
+            <div class="mybook-message {{ count.read_status|get_read_status_colors }}-color align-middle mr-3">
+               <span class="mybook-message-unit">{{ count.read_status|get_read_status_display }}</span><br>
+              {{ count.count }}<span class="mybook-message-unit">권</span>
+            </div>
+          </div>
+        {% endfor %}
+        <div class="mybook-add-book-btn">
+          <a href="{% url 'book-create' %}">
+            <button type="button" class="btn btn-light book-add-btn">책 등록하기</button>
+          </a>
+        </div>
+      </div>
     </div>
+
     {% for book in books %}
       <div class="col-md-4" style="float: left;">
         <div class="book-card">
@@ -19,7 +38,7 @@
           </a>
           <a href="">
             <div class="book-status-badge">
-                <span class="badge badge-pill {{ book.read_status_class }}">
+                <span class="badge badge-pill badge-{{ book.read_status_class }}">
                     {{ book.get_read_status_display }}
                 </span>
             </div>
